@@ -1,0 +1,67 @@
+version: '3'
+
+services:
+  fpga_1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # image: rpi_fpga
+    container_name: fpga_1
+    networks:
+      - rpi_cluster
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./rpi.py:/rpi.py
+  fpga_2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # image: rpi_fpga
+    container_name: fpga_2
+    networks:
+      - rpi_cluster
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./rpi.py:/rpi.py
+  fpga_3:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # image: rpi_fpga
+    container_name: fpga_3
+    networks:
+      - rpi_cluster
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./rpi.py:/rpi.py
+  fpga_4:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # image: rpi_fpga
+    container_name: fpga_4
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./rpi.py:/rpi.py
+    networks:
+      - rpi_cluster
+  fpga_5:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # image: rpi_fpga
+    container_name: fpga_5
+    networks:
+      - rpi_cluster
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./rpi.py:/rpi.py
+
+networks:
+  rpi_cluster:
+    driver: bridge
