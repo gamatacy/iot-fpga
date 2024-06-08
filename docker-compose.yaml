@@ -5,22 +5,24 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    # image: rpi_fpga
     container_name: fpga_1
     networks:
       - rpi_cluster
     stdin_open: true
     tty: true
+    environment:
+      - RPI_HOST=fpga_1
     volumes:
       - ./rpi.py:/rpi.py
   fpga_2:
     build:
       context: .
       dockerfile: Dockerfile
-    # image: rpi_fpga
     container_name: fpga_2
     networks:
       - rpi_cluster
+    environment:
+      - RPI_HOST=fpga_2
     stdin_open: true
     tty: true
     volumes:
@@ -29,10 +31,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    # image: rpi_fpga
     container_name: fpga_3
     networks:
       - rpi_cluster
+    environment:
+      - RPI_HOST=fpga_3
     stdin_open: true
     tty: true
     volumes:
@@ -41,7 +44,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    # image: rpi_fpga
     container_name: fpga_4
     stdin_open: true
     tty: true
@@ -49,19 +51,38 @@ services:
       - ./rpi.py:/rpi.py
     networks:
       - rpi_cluster
+    environment:
+      - RPI_HOST=fpga_4
   fpga_5:
     build:
       context: .
       dockerfile: Dockerfile
-    # image: rpi_fpga
     container_name: fpga_5
     networks:
       - rpi_cluster
     stdin_open: true
     tty: true
+    environment:
+      - RPI_HOST=fpga_5
     volumes:
       - ./rpi.py:/rpi.py
-
+  fpga_runner:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fpga_runner
+    networks:
+      - rpi_cluster
+    stdin_open: true
+    tty: true
+    environment:
+      - RPI_HOST=fpga_runner
+    volumes:
+      - ./rpi.py:/rpi.py
+      - ./remote_fpga_runner.py:/remote_fpga_runner.py
+      - ./bit:/bit
+      - ./waves:/waves
+      
 networks:
   rpi_cluster:
     driver: bridge
